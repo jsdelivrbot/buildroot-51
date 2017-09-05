@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Starting python webserver
+#
+
+    python /usr/bin/serverscripts/server.py &
