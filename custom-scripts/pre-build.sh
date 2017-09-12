@@ -9,5 +9,4 @@ chmod +x $BASE_DIR/target/etc/init.d/Sweb_server
 cp -rf $BASE_DIR/../custom-scripts/serverscripts $BASE_DIR/target/usr/bin
 chmod +xr $BASE_DIR/target/usr/bin/serverscripts
 
-cp ../output/build/linux-custom/.config ../../linux-4.12.4/arch/x86/configs/qemu_x86_custom_def
 

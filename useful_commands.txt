@@ -20,3 +20,6 @@ export LINUX_OVERRIDE_SRCDIR=/home/labredes/linuxdistro/linux-4.12.4/
 $ rm output/build/linux-custom/.stamp_built
 $ rm output/build/linux-custom/.stamp_configured
 $ rm output/build/linux-custom/.stamp_rsynced 
+
+--move linux-menuconfig
+cp buildroot/output/build/linux-custom/.config linux-4.12.4/arch/x86/configs/qemu_x86_custom_defconfig 
