@@ -11,3 +11,5 @@
 *.rej
 *~
 *.pyc
+dl/linux-master.tar.gz
+
