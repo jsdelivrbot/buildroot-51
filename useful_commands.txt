@@ -1,0 +1,22 @@
+-- make config commands
+  $ make menuconfig
+  $ make linux-menuconfig
+
+
+-- qemu start
+  sudo qemu-system-i386 --device e1000,netdev=eth0,mac=aa:bb:cc:dd:ee:ff \
+  	--netdev tap,id=eth0,script=qemu-ifup \
+  	--kernel buildroot/output/images/bzImage \
+  	--hda buildroot/output/images/rootfs.ext2 \
+  	--nographic \
+  	--append "console=ttyS0 root=/dev/sda" 
+
+
+-- before compile
+export LINUX_OVERRIDE_SRCDIR=/home/user/linuxdistro/linux-kernel-4.12.4/
+
+
+--clear linux build
+$ rm output/build/linux-custom/.stamp_built
+$ rm output/build/linux-custom/.stamp_configured
+$ rm output/build/linux-custom/.stamp_rsynced 
