@@ -21,6 +21,8 @@
   	--nographic \
   	--append "console=ttyS0 root=/dev/sda" 
 
+--kill qemu
+  $ killall qemu-system-i386
 
 -- before compile
 export LINUX_OVERRIDE_SRCDIR=/home/labredes/linuxdistro/linux-4.12.4/
