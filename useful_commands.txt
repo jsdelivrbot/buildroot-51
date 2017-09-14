@@ -2,10 +2,20 @@
   $ make menuconfig
   $ make linux-menuconfig
 
+-- Network configuration
+  System configuration  ---> 
+  	 ()  Network interface to configure through DHCP
+  	 [*] Run a getty (login prompt) after boot  --->
+  		  (ttyS0) TTY port
+
+  Device Drivers  ---> 
+  	[*] Network device support  --->    
+  		[*]   Ethernet driver support  ---> 
+  		<*>     Intel(R) PRO/1000 Gigabit Ethernet support 
 
 -- qemu start
   sudo qemu-system-i386 --device e1000,netdev=eth0,mac=aa:bb:cc:dd:ee:ff \
-  	--netdev tap,id=eth0,script=qemu-ifup \
+  	--netdev tap,id=eth0,script=buildroot/qemu-ifup \
   	--kernel buildroot/output/images/bzImage \
   	--hda buildroot/output/images/rootfs.ext2 \
   	--nographic \
