@@ -35,3 +35,21 @@ $ rm output/build/linux-custom/.stamp_rsynced
 
 --move linux-menuconfig
 cp buildroot/output/build/linux-custom/.config linux-4.12.4/arch/x86/configs/qemu_x86_custom_defconfig 
+
+-- driver git
+  $ git clone  https://github.com/Laboratorio-de-SISOP/hello_world_driver.git
+  #Install hello world driver
+  make -C $BASE_DIR/../../hello_driver/
+
+-- disk image creation   
+    dd if=/dev/zero of=sdb.bin bs=512 count=2097152
+
+
+-- qemu with alternate disk image
+  sudo qemu-system-i386 --device e1000,netdev=eth0,mac=aa:bb:cc:dd:ee:ff \
+  	--netdev tap,id=eth0,script=buildroot/qemu-ifup \
+  	--kernel buildroot/output/images/bzImage \
+  	--hda buildroot/output/images/rootfs.ext2 \
+  	--nographic \
+  	--append "console=ttyS0 root=/dev/sda" \
+    --hdb sdb.bin
