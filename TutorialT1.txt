@@ -1,0 +1,77 @@
+André Antonitsch  -  15105044
+
+# Tutorial para um webserver python
+
+## Passo 0
+	Crie um diretório serverscripts na pasta custom-scripts do buildroot
+## Passo 1
+
+	Crie um script python contendo o seguinte código.
+		
+
+	/// 
+	from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
+	from socketserver import TCPServer
+
+	Handler = MyRequestHandler
+	server = TCPServer(('0.0.0.0', 8080), Handler)
+	server.serve_forever()
+	///
+
+	A classe MyRequestHandler é responsável por gerenciar as requests http do servidor.
+	Como exemplo:
+
+	///
+	class MyRequestHandler(SimpleHTTPRequestHandler):
+    		def do_GET(self):
+        
+        		current_time = time.localtime()
+        		elapsed_time = time.time() - server_start
+
+        		path = '/usr/bin/serverscripts/index_bkp.html'
+        		index_file = open(path)
+        		f = index_file.read()
+        		index_file.close()
+
+        		f = re.sub(r"bbb", str(elapsed_time), f)
+
+       			self.path = '/usr/bin/serverscripts/index.html'
+        		index_file = open(self.path, 'w')
+       			index_file.write(f)
+        		index_file.close()
+
+        		return SimpleHTTPRequestHandler.do_GET(self)
+	///
+
+	Este exemplo deve ser acompanhado por um index.html contendo as tags a serem substituídas pela informação desejada.
+	
+	Coloque o index.html e o server.py no diretório serverscripts
+	
+## Passo 2
+	Adicionar ao buildroot o package do python.
+
+## Passo 3
+	Criar um script shell para inicializar o webserver.
+	
+	Crie um arquivo chamado Sweb_server contendo:
+	
+	///
+	#!/bin/sh
+	#
+	# Starting python webserver
+	#
+    		python /usr/bin/serverscripts/server.py &
+	///
+
+## Passo 4
+
+	Adicione estas linhas ao pre-build.sh	
+
+	cp $BASE_DIR/../custom-scripts/Sweb_server $BASE_DIR/target/etc/init.d
+	chmod +x $BASE_DIR/target/etc/init.d/Sweb_server
+
+	cp -rf $BASE_DIR/../custom-scripts/serverscripts $BASE_DIR/target/usr/bin
+	chmod +xr $BASE_DIR/target/usr/bin/serverscripts
+	
+## Passo 5
+	Teste o webserver acessando o endereço ip na porta apropriada em algum browser.	
