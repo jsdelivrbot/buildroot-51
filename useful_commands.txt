@@ -53,3 +53,9 @@ cp buildroot/output/build/linux-custom/.config linux-4.12.4/arch/x86/configs/qem
   	--nographic \
   	--append "console=ttyS0 root=/dev/sda" \
     --hdb sdb.bin
+
+-- Set scheduler
+    echo sstf > /sys/block/sdb/queue/scheduler
+
+-- verify scheduler
+    cat /sys/block/sdb/queue/scheduler
