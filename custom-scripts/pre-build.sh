@@ -9,6 +9,8 @@ chmod +x $BASE_DIR/target/etc/init.d/Sweb_server
 cp -rf $BASE_DIR/../custom-scripts/serverscripts $BASE_DIR/target/usr/bin
 chmod +xr $BASE_DIR/target/usr/bin/serverscripts
 
+cp $BASE_DIR/../custom-scripts/thread_runner $BASE_DIR/target/usr/bin
+
 #Compile the syscall_test.c
 BUILDROOT_DIR=$BASE_DIR/..
 COMPILER=$BUILDROOT_DIR/output/host/bin/i686-buildroot-linux-uclibc-gcc
