@@ -8,6 +8,9 @@ Vinicius Sesti
 #include <linux/sched.h>
 #include <string.h>
 
+//covardia do André!!!
+#define SCHED_LOW_IDLE 		7
+
 char *buffer;
 int thread_size;
 int buf_ptr_idx;
@@ -42,6 +45,9 @@ void print_sched(int policy){
 			break;
 		case SCHED_OTHER: 
 			printf("SCHED_OTHER\n");
+			break;
+		case SCHED_LOW_IDLE:
+			printf("SCHED_LOW_IDLE\n");
 			break;
 		default:
 			printf("unknown\n");
@@ -88,6 +94,9 @@ int main(int argc, char **argv){
 	else if(!strcmp(policy,"SCHED_OTHER")){
 		new_policy = SCHED_OTHER;
 	}
+	else if(!strcmp(policy,"SCHED_LOW_IDLE")){
+		new_policy = SCHED_LOW_IDLE;
+	}
 
 	thread_size = buf_size/num_threads;
 	buf_ptr_idx = 0;	
@@ -116,17 +125,18 @@ int main(int argc, char **argv){
 
 	(*(scheds + *buffer - 'A'))++;
 
-	
+	if(*(argv+5))
 		printf("%c",*buffer);
-		for (int i = 1; i < buf_ptr_idx; i++){
-			if (*(argv+5)){
-				printf("%c",*(buffer+i));
-			}
-			if(*(buffer+i)!=*(buffer+i-1)){
-				(*(scheds + *(buffer+i) - 'A'))++;
-			}
+
+	for (int i = 1; i < buf_ptr_idx; i++){
+		if (*(argv+5)){
+			printf("%c",*(buffer+i));
 		}
-		printf("\n");
+		if(*(buffer+i)!=*(buffer+i-1)){
+			(*(scheds + *(buffer+i) - 'A'))++;
+		}
+	}
+	printf("\n");
 
 	
 	for (int i = 0; i < num_threads; i++){
