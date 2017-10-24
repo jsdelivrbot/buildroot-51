@@ -1,3 +1,7 @@
+/*
+Andre Antonitsch
+Vinicius Sesti
+*/
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
