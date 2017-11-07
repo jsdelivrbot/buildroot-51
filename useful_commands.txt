@@ -59,3 +59,7 @@ cp buildroot/output/build/linux-custom/.config linux-4.12.4/arch/x86/configs/qem
 
 -- verify scheduler
     cat /sys/block/sdb/queue/scheduler
+
+
+
+

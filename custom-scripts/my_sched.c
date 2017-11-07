@@ -46,6 +46,8 @@ void print_sched(int policy){
 		case SCHED_OTHER: 
 			printf("SCHED_OTHER\n");
 			break;
+		case SCHED_IDLE:
+			printf("SCHED_IDLE\n");
 		case SCHED_LOW_IDLE:
 			printf("SCHED_LOW_IDLE\n");
 			break;
@@ -93,6 +95,9 @@ int main(int argc, char **argv){
 	}
 	else if(!strcmp(policy,"SCHED_OTHER")){
 		new_policy = SCHED_OTHER;
+	}
+	else if(!strcmp(policy,"SCHED_IDLE")){
+		new_policy = SCHED_IDLE;
 	}
 	else if(!strcmp(policy,"SCHED_LOW_IDLE")){
 		new_policy = SCHED_LOW_IDLE;
