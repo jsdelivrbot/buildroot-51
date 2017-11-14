@@ -23,8 +23,13 @@ $COMPILER -o $BUILDROOT_DIR/output/target/bin/disk_access_test $BUILDROOT_DIR/cu
 
 make -C $BASE_DIR/../../LabSisOpT2/
 
+make -C $BASE_DIR/pidmodule/
 
-#Compile the my_sched.c
+#Compile my_sched.c
 COMPILER=$BUILDROOT_DIR/output/host/bin/i686-buildroot-linux-uclibc-gcc
 $COMPILER -o $BUILDROOT_DIR/output/target/bin/thread_runner $BUILDROOT_DIR/custom-scripts/my_sched.c -lpthread
+
+#Compile mem.c
+COMPILER=$BUILDROOT_DIR/output/host/bin/i686-buildroot-linux-uclibc-gcc
+$COMPILER -o $BUILDROOT_DIR/output/target/bin/memoria $BUILDROOT_DIR/custom-scripts/mem.c
 
