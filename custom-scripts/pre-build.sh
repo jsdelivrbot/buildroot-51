@@ -23,13 +23,14 @@ $COMPILER -o $BUILDROOT_DIR/output/target/bin/disk_access_test $BUILDROOT_DIR/cu
 
 make -C $BASE_DIR/../../LabSisOpT2/
 
-make -C $BASE_DIR/pidmodule/
+make -C $BASE_DIR/../custom-scripts/pidmodule/
 
 #Compile my_sched.c
 COMPILER=$BUILDROOT_DIR/output/host/bin/i686-buildroot-linux-uclibc-gcc
 $COMPILER -o $BUILDROOT_DIR/output/target/bin/thread_runner $BUILDROOT_DIR/custom-scripts/my_sched.c -lpthread
 
-#Compile mem.c
+#Compile seg.c
 COMPILER=$BUILDROOT_DIR/output/host/bin/i686-buildroot-linux-uclibc-gcc
-$COMPILER -o $BUILDROOT_DIR/output/target/bin/memoria $BUILDROOT_DIR/custom-scripts/mem.c
+$COMPILER -o $BUILDROOT_DIR/output/target/bin/seg $BUILDROOT_DIR/custom-scripts/seg.c
 
+echo "tracefs       /sys/kernel/tracing       tracefs defaults        0       0" >> $BASE_DIR/target/etc/fstab
